@@ -44,7 +44,8 @@
   font-size: 25px;
   letter-spacing: 15px;
   text-decoration: none;
-  font-size: 45px;
+  font-size: 450%;
+  font-weight: bold;
   box-shadow: 8px 8px #bbb;
   border-radius: 50px;
   cursor: pointer;
