@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
-// import Header from "../components/Header";
-// import { contents } from "../contents";
+import Header from "../components/Header";
+import { contents } from "../contents";
 
 export default function item() {
   return (
     <div>
-      {/* <Header title="項 目" /> */}
+      <Header title="項 目" />
       <ul className={styles.ul}>
         {contents.map((list, index) => {
           return (
