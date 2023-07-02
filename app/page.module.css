@@ -16,14 +16,14 @@
 }
 
 .title {
-  width: 1200px;
+  width: 1150px;
   align-items: center;
   display: flex;
   color: maroon;
   margin: 100px auto;
   text-shadow: 15px 10px 0 #ccc;
   justify-content: space-between;
-  font-size: 60px;
+  font-size: 55px;
 }
 
 .img {
