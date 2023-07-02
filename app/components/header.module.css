@@ -1,0 +1,24 @@
+.contents {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: red;
+}
+
+/* 画像の変更（背景が黒だから項目と統一するため）*/
+.returnImg {
+  width: 90px;
+  height: 100%;
+  background-color: #d49fbb;
+  object-fit: cover;
+}
+
+.names {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  background-color: #d4ad9f;
+  font-size: 60px;
+  letter-spacing: 10px;
+}

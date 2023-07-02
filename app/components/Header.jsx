@@ -1,18 +1,19 @@
+"use client";
 import React from "react";
 import styles from "./header.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import Return from "../images/Return.jpg";
+import Return from "../images/Return.svg";
 
 const Header = (props) => {
+  const title = props.title;
   return (
-    <div>
-      <h2 className={styles.name}>
-        <Link href="" className={styles.returnImg}>
-          <Image className={styles.returnImg} srn={Return} alt="戻るボタン" />
-        </Link>
-        {props.title}
-      </h2>
+    <div className={styles.contents}>
+      <Link href={title === "項 目" ? "/" : "../Item"}>
+        {/* 画像の変更（背景が黒だから項目と統一する） */}
+        <Image className={styles.returnImg} src={Return} alt="戻るボタン" />
+      </Link>
+      <h2 className={styles.names}>{props.title}</h2>
     </div>
   );
 };
