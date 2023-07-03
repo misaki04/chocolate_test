@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Header from "@/app/components/Header";
+import Header from "@/app/components/Header/Header";
 import styles from "./page.module.css";
 import Link from "next/link";
 
@@ -40,7 +40,7 @@ function Page(props) {
       <Header title={data.title} />
       <h3 className={styles.contents}>出題内容</h3>
       <p className={styles.text}>{data.message}</p>
-      <Link href="/" className={styles.button}>
+      <Link href={"../../questions"} className={styles.button}>
         ２０問
       </Link>
     </div>

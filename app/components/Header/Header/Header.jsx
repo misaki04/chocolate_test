@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./header.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import Return from "../images/Return.svg";
+import Return from "../../images/Return.svg";
 
 const Header = (props) => {
   const title = props.title;
