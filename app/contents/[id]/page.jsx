@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Header from "@/app/components/Header/Header";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -32,15 +32,16 @@ function Page(props) {
   const id = props.params.id;
   const data = ITEMS.find((item) => item.id === id);
   console.log("データの形は？", data);
-  const [selectedText, setSelectedText] = useState("");
+  // const [selectedText, setSelectedText] = useState("");
   // console.logはpropsが下記のバリューとあっているか確かめるために実行している。
+  const userLevel = [`special`, `expert`, `professional`];
 
   return (
     <div>
       <Header title={data.title} />
       <h3 className={styles.contents}>出題内容</h3>
       <p className={styles.text}>{data.message}</p>
-      <Link href={"../../questions"} className={styles.button}>
+      <Link href={`/questions/${id}`} className={styles.button}>
         ２０問
       </Link>
     </div>

@@ -1,21 +1,38 @@
 "use client";
+import React, { useEffect, useMemo, useState } from "react";
+import Header from "@/app/components/Header/Header";
 import styles from "./page.module.css";
-import Header from "../components/Header/Header";
+import { AAA, BBB } from "@/app/data";
 
-//     //  ①ここはヘッダー
-//     //  ②メインエリア
-//     //  ③問題文
-//     //  ④選択するボタン
-
-import React, { useState } from "react";
-import { questions } from "../data";
-
-// 関数
-export default function QuizApp() {
+const Page = (props) => {
+  const id = props.params.id;
   const [currentQuestion, setCurrentQuestion] = useState(0); //現在問題
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [explanation, setExplanation] = useState(null); // 説明
+
+  /** クイズのデータを取得 */
+  const questions = useMemo(() => {
+    if (id === "special") {
+      return AAA;
+    } else if (id === "expert") {
+      return BBB;
+    } else if (id === "professional") {
+      return CCC;
+    }
+  }, [id]);
+
+  /** ヘッダーのタイトルを取得 */
+  const title = useMemo(() => {
+    if (id === "special") {
+      return "スペシャリスト（初級）";
+    } else if (id === "expert") {
+      return "エキスパート(中級)";
+    } else if (id === "professional") {
+      return "プロフェッショナル(上級)";
+    }
+  }, [id]);
+
   //if文（三項演算子(true・false)
   const handleAnswerOptionClick = (selectedAnswer) => {
     if (selectedAnswer === questions[currentQuestion].answer) {
@@ -43,10 +60,10 @@ export default function QuizApp() {
     <div className="container">
       {/* 定義X（何をするか？）＝ 定義Xに何を代入するか？→今回であれば＄{}は文字列を代入*/}
       {/* <Header title={`問題${currentQuestion + 1}`} /> */}
-      <Header title={`スペシャリスト（初級)`} />
+      <Header title={title} />
       {showScore ? (
         <div className={styles.test}>
-          <p>
+          <p className={styles.score}>
             得点：{score} / {questions.length}
           </p>
           {questions.map((question, index) => (
@@ -89,4 +106,6 @@ export default function QuizApp() {
       )}
     </div>
   );
-}
+};
+
+export default Page;

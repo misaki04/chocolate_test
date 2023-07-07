@@ -39,7 +39,7 @@
   padding: 0 20px;
   margin: 8px auto;
   text-align: left;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: bold;
   background-color: white;
   color: black;
@@ -57,8 +57,10 @@
 }
 
 .score {
-  font-size: 20px;
-  margin-bottom: 10px;
+  text-align: center;
+  color: #cd2020;
+  margin: 0 auto;
+  font-size: 50px;
 }
 
 .restart {
@@ -84,35 +86,43 @@
   margin: 20px auto;
 }
 
+.answer {
+  color: #cd2020;
+}
+
+.explanation {
+  color: rgb(44, 71, 192);
+}
+
 /* ボタンの文字とクリックした時に光る設定に変更 */
 /*折り返しbutton*/
 /* .button {
-  display: inline-block;
-  width: 500px;
-  height: 180px;
-  padding: 10px;
-  margin: 10px;
-  font-size: 30px;
-  font-weight: bold;
-  background-color: #f2f2f2;
-  border-color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  letter-spacing: 2px;
-} */
+    display: inline-block;
+    width: 500px;
+    height: 180px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #f2f2f2;
+    border-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    letter-spacing: 2px;
+  } */
 
 /* 折り返しボタン */
 /* .question {
-  width: 75%;
-  height: 160px;
-  display: block;
-  margin: 10px auto;
-  font-size: 40px;
-  font-weight: bold;
-  line-height: 1.8;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-} */
+    width: 75%;
+    height: 160px;
+    display: block;
+    margin: 10px auto;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.8;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  } */
