@@ -7,12 +7,12 @@ import { contents } from "../contents";
 export default function item() {
   return (
     <div>
-      <Header title="項 目" />
+      <Header className={`${styles.title}`} title="項 目" />
       <ul className={styles.ul}>
         {contents.map((list, index) => {
           return (
             <div class={styles.listItem} key={index}>
-              <div>★</div>
+              <div className={styles.star}>★</div>
               <Link
                 key={index}
                 className={styles.button}

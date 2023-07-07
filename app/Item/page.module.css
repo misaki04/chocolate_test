@@ -3,14 +3,19 @@
   font-weight: bold;
   letter-spacing: 10px;
   line-height: 90px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
+  justify-content: center;
+  display: grid;
+}
+
+.title {
+  margin: auto;
 }
 
 .listItem {
   display: flex;
   align-items: center;
-  justify-content: center;
   font-size: 55px;
   color: rgb(201, 176, 34);
 }

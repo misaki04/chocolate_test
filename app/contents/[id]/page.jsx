@@ -34,7 +34,6 @@ function Page(props) {
   console.log("データの形は？", data);
   // const [selectedText, setSelectedText] = useState("");
   // console.logはpropsが下記のバリューとあっているか確かめるために実行している。
-  const userLevel = [`special`, `expert`, `professional`];
 
   return (
     <div>
