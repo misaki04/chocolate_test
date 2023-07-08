@@ -32,7 +32,6 @@ function Page(props) {
   const id = props.params.id;
   const data = ITEMS.find((item) => item.id === id);
   console.log("データの形は？", data);
-  // const [selectedText, setSelectedText] = useState("");
   // console.logはpropsが下記のバリューとあっているか確かめるために実行している。
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Header from "@/app/components/Header/Header";
 import styles from "./page.module.css";
 import { AAA, BBB } from "@/app/data";
@@ -7,6 +7,8 @@ import { AAA, BBB } from "@/app/data";
 const Page = (props) => {
   const id = props.params.id;
   const [currentQuestion, setCurrentQuestion] = useState(0); //現在問題
+  const [correctAnswers, setCorrectAnswers] = useState([]); //正解の回答
+  const [userAnswers, setUserAnswers] = useState([]); //ユーザーの回答
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [explanation, setExplanation] = useState(null); // 説明
@@ -33,9 +35,16 @@ const Page = (props) => {
     }
   }, [id]);
 
-  //if文（三項演算子(true・false)
   const handleAnswerOptionClick = (selectedAnswer) => {
-    if (selectedAnswer === questions[currentQuestion].answer) {
+    /// スコアの計算などの処理
+    const currentQuestionData = questions[currentQuestion];
+    const isCorrectAnswer = selectedAnswer === currentQuestionData.answer;
+
+    // 正解と回答を配列に追加
+    setCorrectAnswers([...correctAnswers, currentQuestionData.answer]);
+    setUserAnswers([...userAnswers, selectedAnswer]);
+
+    if (isCorrectAnswer) {
       setScore(score + 1);
     }
 
@@ -66,20 +75,20 @@ const Page = (props) => {
           <p className={styles.score}>
             得点：{score} / {questions.length}
           </p>
+          <button className={styles.restart} onClick={handleRestartQuiz}>
+            再挑戦
+          </button>
           {questions.map((question, index) => (
             <div key={index}>
               <p>Q.{index + 1}</p> {/* No.1〜No.20を表示 */}
               <p>{question.question}</p>
-              <p className={styles.answer}>【解答】 {question.answer}</p>
+              <p className={styles.userAnswer}>【回答】{userAnswers[index]}</p>
+              <p className={styles.answer}>【正解】 {correctAnswers[index]}</p>
               <p className={styles.explanation}>
                 【解説】{question.explanation}
               </p>
             </div>
           ))}
-          {/* 解説の表示 */}
-          <button className={styles.restart} onClick={handleRestartQuiz}>
-            再挑戦
-          </button>{" "}
         </div>
       ) : (
         //問題と選択肢の表示

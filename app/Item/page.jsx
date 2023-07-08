@@ -11,7 +11,7 @@ export default function item() {
       <ul className={styles.ul}>
         {contents.map((list, index) => {
           return (
-            <div class={styles.listItem} key={index}>
+            <div className={styles.listItem} key={index}>
               <div className={styles.star}>★</div>
               <Link
                 key={index}
