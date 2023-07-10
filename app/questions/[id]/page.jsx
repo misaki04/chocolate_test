@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from "react";
 import Header from "@/app/components/Header/Header";
 import styles from "./page.module.css";
-import { AAA, BBB } from "@/app/data";
+import { special, expert, professional } from "@/app/data";
 
 const Page = (props) => {
   const id = props.params.id;
@@ -16,11 +16,11 @@ const Page = (props) => {
   /** クイズのデータを取得 */
   const questions = useMemo(() => {
     if (id === "special") {
-      return AAA;
+      return special;
     } else if (id === "expert") {
-      return BBB;
+      return expert;
     } else if (id === "professional") {
-      return CCC;
+      return professional;
     }
   }, [id]);
 
@@ -34,9 +34,8 @@ const Page = (props) => {
       return "プロフェッショナル(上級)";
     }
   }, [id]);
-
+  //ユーザーが選択した回答が正解かどうか判定するための処理
   const handleAnswerOptionClick = (selectedAnswer) => {
-    /// スコアの計算などの処理
     const currentQuestionData = questions[currentQuestion];
     const isCorrectAnswer = selectedAnswer === currentQuestionData.answer;
 
@@ -44,46 +43,57 @@ const Page = (props) => {
     setCorrectAnswers([...correctAnswers, currentQuestionData.answer]);
     setUserAnswers([...userAnswers, selectedAnswer]);
 
+    // スコアを加算する為の処理
     if (isCorrectAnswer) {
       setScore(score + 1);
     }
-
+    // 問題を出題するか最終問題でスコアを表示するか制御
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
       setShowScore(true);
     }
-
-    setExplanation(questions[currentQuestion].explanation); // 正解時に解説を表示
+    // 正解時に解説を表示
+    setExplanation(questions[currentQuestion].explanation);
   };
-  // アロー関数
+  // クイズをリスタートするための処理（
   const handleRestartQuiz = () => {
-    setCurrentQuestion(0);
-    setScore(0);
-    setShowScore(false);
+    setCurrentQuestion(0); // 問題番号をリセット
+    setScore(0); // スコアをリセット
+    setShowScore(false); // スコアの表示状態をリセット
     setExplanation(null); // 解説の表示をリセット
   };
-  // 三項演算子
+
   return (
-    <div className="container">
+    <div>
       {/* 定義X（何をするか？）＝ 定義Xに何を代入するか？→今回であれば＄{}は文字列を代入*/}
-      {/* <Header title={`問題${currentQuestion + 1}`} /> */}
       <Header title={title} />
       {showScore ? (
+        // スコアの表示
         <div className={styles.test}>
-          <p className={styles.score}>
-            得点：{score} / {questions.length}
-          </p>
-          <button className={styles.restart} onClick={handleRestartQuiz}>
-            再挑戦
-          </button>
+          <div className={styles.result}>
+            {/* 得点の表示 */}
+            <p className={styles.score}>
+              得点：{score} / {questions.length}
+            </p>
+            {/* 再挑戦ボタンの表示 */}
+            <button className={styles.restart} onClick={handleRestartQuiz}>
+              再挑戦
+            </button>
+          </div>
+          {/* 問題ごとの結果を表示 */}
           {questions.map((question, index) => (
-            <div key={index}>
-              <p>Q.{index + 1}</p> {/* No.1〜No.20を表示 */}
-              <p>{question.question}</p>
-              <p className={styles.userAnswer}>【回答】{userAnswers[index]}</p>
+            <div className={styles.container} key={index}>
+              {/* 問題番号と問題文の表示 */}
+              <p>
+                Q.{index + 1} {question.question}
+              </p>
+              {/* ユーザーの回答を表示 */}
+              <p>【回答】{userAnswers[index]}</p>
+              {/* 正解の表示 */}
               <p className={styles.answer}>【正解】 {correctAnswers[index]}</p>
+              {/* 解説の表示 */}
               <p className={styles.explanation}>
                 【解説】{question.explanation}
               </p>
@@ -94,12 +104,13 @@ const Page = (props) => {
         //問題と選択肢の表示
         <div>
           <h1 className={styles.Q}>Question {currentQuestion + 1}</h1>
-          {/* 問題文表示*/}
+          {/* 問題文の表示*/}
           <p className={styles.question}>
             {questions[currentQuestion].question}
           </p>
-          {/* 選択肢表示 */}
+          {/* 選択肢の表示 */}
           <div className={styles.options}>
+            {/* {questions[currentQuestion].options.map((option, index) => ( */}
             {questions[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
