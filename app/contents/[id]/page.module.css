@@ -24,24 +24,60 @@
   line-height: 20px 100%;
 }
 
-/* 初級のバランスを考える */
+@keyframes shiny {
+  0% {
+    left: -20%;
+  }
+  10% {
+    left: 120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
 .button {
+  display: flex;
   width: 400px;
   height: 90px;
   margin: 25px auto;
-  background: rgb(200, 65, 65);
-  display: flex;
-  justify-content: center;
-  color: aliceblue;
-  font-weight: bold;
   font-size: 60px;
-  border-radius: 50px;
-  box-shadow: 8px 8px 0 #bbb;
+  letter-spacing: 15px;
   text-decoration: none;
+  font-weight: bold;
+  justify-content: center;
+  color: #ffffff;
+  background-color: rgb(200, 65, 65);
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 .button:hover {
-  background-color: rgb(205, 65, 65);
+  background-color: rgb(227, 46, 46);
   box-shadow: none;
   transform: translate(2px, 2px);
+  box-shadow: 8px 8px #bbb;
+  border-radius: 50px;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -20%;
+  width: 40px;
+  height: 100%;
+  transform: scale(2) rotate(20deg);
+  background-image: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0.5) 100%,
+    rgba(255, 255, 255, 0) 0%
+  );
+
+  /* アニメーション */
+  animation-name: shiny;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
