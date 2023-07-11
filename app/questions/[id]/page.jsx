@@ -11,7 +11,6 @@ const Page = (props) => {
   const [userAnswers, setUserAnswers] = useState([]); //ユーザーの回答
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-  const [explanation, setExplanation] = useState(null); // 説明
 
   /** クイズのデータを取得 */
   const questions = useMemo(() => {
@@ -47,6 +46,13 @@ const Page = (props) => {
     if (isCorrectAnswer) {
       setScore(score + 1);
     }
+
+    const handleAnswerOptionCorrect = (isCorrect) => {
+      if (isCorrect) {
+        setScore(score + 1);
+      }
+    };
+
     // 問題を出題するか最終問題でスコアを表示するか制御
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
@@ -55,14 +61,13 @@ const Page = (props) => {
       setShowScore(true);
     }
     // 正解時に解説を表示
-    setExplanation(questions[currentQuestion].explanation);
+    console.log(questions[currentQuestion].explanation);
   };
   // クイズをリスタートするための処理（
   const handleRestartQuiz = () => {
     setCurrentQuestion(0); // 問題番号をリセット
     setScore(0); // スコアをリセット
     setShowScore(false); // スコアの表示状態をリセット
-    setExplanation(null); // 解説の表示をリセット
   };
 
   return (
@@ -73,6 +78,10 @@ const Page = (props) => {
         // スコアの表示
         <div className={styles.test}>
           <div className={styles.result}>
+            <div className={styles.message}>
+              <h2> テストお疲れ様でした。</h2>
+              <h2>本番に向けて頑張ってください！！</h2>
+            </div>
             {/* 得点の表示 */}
             <p className={styles.score}>
               得点：{score} / {questions.length}
@@ -86,17 +95,24 @@ const Page = (props) => {
           {questions.map((question, index) => (
             <div className={styles.container} key={index}>
               {/* 問題番号と問題文の表示 */}
-              <p>
-                Q.{index + 1} {question.question}
+              <p className={styles.number}>
+                Question{index + 1} {question.question}
               </p>
               {/* ユーザーの回答を表示 */}
-              <p>【回答】{userAnswers[index]}</p>
-              {/* 正解の表示 */}
-              <p className={styles.answer}>【正解】 {correctAnswers[index]}</p>
-              {/* 解説の表示 */}
-              <p className={styles.explanation}>
-                【解説】{question.explanation}
-              </p>
+              <div className={styles.p}>
+                <p>
+                  【回答】
+                  {userAnswers[index] === correctAnswers[index] ? `⭕️` : `❌`}
+                </p>
+                {/* <p>【回答】{userAnswers[index]}</p> */}
+                {/* 正解の表示 */}
+                <p className={styles.answer}>【正解】{correctAnswers[index]}</p>
+                {/* 解説の表示 */}
+                <p className={styles.explanation}>
+                  【解説】{question.explanation}
+                </p>
+                <hr classNama={styles.box} />
+              </div>
             </div>
           ))}
         </div>
